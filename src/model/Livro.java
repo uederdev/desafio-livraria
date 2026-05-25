@@ -6,13 +6,20 @@ public class Livro {
 
     private Long id;
     private String titulo;
-    private String autor;
-    private Boolean disponivel;
+    private Autor autor;
+    private Boolean disponivel = true;
     private LocalDate dataCadastro = LocalDate.now();
     private LocalDate dataAlteracao;
 
     public Livro() {
 
+    }
+
+    public Livro(Long id, String titulo, Autor autor) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.disponivel = true;
     }
 
     public Long getId() {
@@ -31,11 +38,11 @@ public class Livro {
         this.titulo = titulo;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
@@ -61,5 +68,15 @@ public class Livro {
         return dataAlteracao;
     }
 
-
+    @Override
+    public String toString() {
+        return "Livro{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", autor=" + autor +
+                ", disponivel=" + disponivel +
+                ", dataCadastro=" + dataCadastro +
+                ", dataAlteracao=" + dataAlteracao +
+                '}';
+    }
 }
