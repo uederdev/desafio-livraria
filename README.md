@@ -1,45 +1,164 @@
-<div align="center">
-  <img height="150" src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif"  />
-</div>
+# 📚 Livraria App
 
-###
+Sistema de gerenciamento de biblioteca desenvolvido em Java utilizando Programação Orientada a Objetos (POO), menus interativos e estrutura em camadas.
 
-<div align="center">
-  <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="gmail logo"  />
-  <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="linkedin logo"  />
-  <img src="https://img.shields.io/static/v1?message=Telegram&logo=telegram&label=&color=2CA5E0&logoColor=white&labelColor=&style=for-the-badge" height="25" alt="telegram logo"  />
-</div>
+O projeto permite realizar o gerenciamento de:
 
-###
+- Livros
+- Autores
+- Clientes
+- Empréstimos
 
-<h1 align="center">hey there 👋</h1>
+Tudo através de um sistema de console organizado em menus.
 
-###
+---
 
-<h3 align="left">👩‍💻  About Me</h3>
+# 🚀 Funcionalidades
 
-###
+## 📖 Livros
+- Cadastro de livros
+- Listagem de livros
+- Controle de disponibilidade
+- Associação com autores
 
-<p align="left">Desenvolvedor Backend<br>- Java <br>- Banco de Dados<br>- ABAP</p>
+## ✍️ Autores
+- Cadastro de autores
+- Listagem de autores
 
-###
+## 👤 Clientes
+- Cadastro de clientes
+- Listagem de clientes
 
-<h3 align="left">🛠 Language Developer and tools</h3>
+## 📄 Empréstimos
+- Realização de empréstimos
+- Controle de devoluções
+- Histórico de empréstimos
 
-###
+---
 
-<div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="40" alt="git logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="40" alt="github logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" height="40" alt="intellij logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="40" alt="java logo"  />
-</div>
+# 🏗️ Estrutura do Projeto
 
-###
+```bash
+src/
+├── dao/
+│   ├── AutorDao.java
+│   ├── BancoDados.java
+│   ├── ClienteDao.java
+│   ├── Dao.java
+│   ├── EmprestimoDao.java
+│   └── LivroDao.java
+│
+├── menu/
+│   ├── IMenu.java
+│   ├── MenuAutor.java
+│   ├── MenuCliente.java
+│   ├── MenuEmprestimos.java
+│   ├── MenuLivro.java
+│   └── MenuPrincipal.java
+│
+├── model/
+│   ├── Autor.java
+│   ├── Biblioteca.java
+│   ├── Cliente.java
+│   ├── Emprestimo.java
+│   └── Livro.java
+│
+└── Main.java
+```
 
-<h3 align="left">🔥   My Stats :</h3>
+---
 
-###
+# 🧱 Arquitetura do Projeto
+
+## 📂 DAO
+Responsável pela manipulação e gerenciamento dos dados da aplicação.
+
+## 📂 MENU
+Responsável pela interação com o usuário através do console.
+
+## 📂 MODEL
+Contém as entidades principais do sistema.
+
+---
+
+# 💻 Tecnologias Utilizadas
+
+- Java
+- Programação Orientada a Objetos (POO)
+- Collections Framework
+- Scanner
+- LocalDate / LocalDateTime
+
+---
+
+# ▶️ Como Executar
+
+## ✅ Pré-requisitos
+
+- Java 17+ instalado
+- IntelliJ IDEA, Eclipse ou VS Code
+
+---
+
+## 📥 Clonar Repositório
+
+```bash
+git clone https://github.com/seu-usuario/livraria-app.git
+```
+
+---
+
+## 📂 Acessar Projeto
+
+```bash
+cd livraria-app
+```
+
+---
+
+## ⚙️ Compilar
+
+```bash
+javac Main.java
+```
+
+---
+
+## ▶️ Executar
+
+```bash
+java Main
+```
+
+---
+
+# 📚 Conceitos Aplicados
+
+- Classes e Objetos
+- Encapsulamento
+- Herança e composição
+- Organização em camadas
+- Manipulação de listas
+- Menus interativos
+- Relacionamento entre entidades
+- Entrada de dados com Scanner
+
+---
+
+# 🚀 Melhorias Futuras
+
+- [ ] Persistência em banco de dados
+- [ ] API REST com Spring Boot
+- [ ] Interface gráfica
+- [ ] Login de usuários
+- [ ] Relatórios
+- [ ] Busca avançada
+- [ ] Exportação de dados
+
+---
+
+# 👨‍💻 Autor
+Ueder Carlos Costa Caetano
+- [LinkedIn](https://www.linkedin.com/in/uedercosta/)
+- [GitHub](https://github.com/uederdev)
+Projeto desenvolvido para estudos e prática em Java.
