@@ -21,6 +21,7 @@ public class ClienteDao implements Dao<Cliente>{
 
     @Override
     public void salvar(Cliente model) {
+        model.setId(db.getId());
         db.getClientes().add(model);
     }
 

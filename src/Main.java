@@ -1,6 +1,4 @@
-import menu.MenuAutor;
-import menu.MenuLivro;
-import menu.MenuPrincipal;
+import menu.*;
 
 import java.util.Scanner;
 
@@ -11,12 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         while (opcao != 0) {
-            MenuPrincipal menuPrincipal = new MenuPrincipal();
-            menuPrincipal.exibirMenu();
-
+            new MenuPrincipal().exibirMenu();
             System.out.print("Informe a opção desejada: ");
             opcao = sc.nextInt();
-
             switch (opcao) {
                 case 0:
                     System.out.println("Saindo do Sistema...");
@@ -29,6 +24,16 @@ public class Main {
                 case 2:
                     MenuLivro menuLivro = new MenuLivro(sc, opcao);
                     menuLivro.exibirMenu();
+                    opcao = -1;
+                    break;
+                case 3:
+                    MenuCliente menuCliente = new MenuCliente(sc, opcao);
+                    menuCliente.exibirMenu();
+                    opcao = -1;
+                    break;
+                case 4:
+                    MenuEmprestimos menuEmprestimos = new MenuEmprestimos(sc, opcao);
+                    menuEmprestimos.exibirMenu();
                     opcao = -1;
                     break;
                 default:

@@ -6,9 +6,17 @@ public class Emprestimo {
 
     private Long id;
     private Livro livro;
-    private String nomeCliente;
+    private Cliente cliente;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
+
+    public Emprestimo() {
+    }
+
+    public Emprestimo(Livro livro, Cliente cliente) {
+        this.livro = livro;
+        this.cliente = cliente;
+    }
 
     public Long getId() {
         return id;
@@ -26,12 +34,12 @@ public class Emprestimo {
         this.livro = livro;
     }
 
-    public String getNomeCliente() {
-        return nomeCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setNomeCliente(String nomeCliente) {
-        this.nomeCliente = nomeCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public LocalDate getDataEmprestimo() {
@@ -48,5 +56,16 @@ public class Emprestimo {
 
     public void devolver() {
         this.dataDevolucao = LocalDate.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Emprestimo{" +
+                "id=" + id +
+                ", livro=" + livro +
+                ", cliente=" + cliente +
+                ", dataEmprestimo=" + dataEmprestimo +
+                ", dataDevolucao=" + dataDevolucao +
+                '}';
     }
 }

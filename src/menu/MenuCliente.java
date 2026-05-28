@@ -1,26 +1,28 @@
 package menu;
 
 import dao.AutorDao;
+import dao.ClienteDao;
 import model.Autor;
+import model.Cliente;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class MenuAutor implements IMenu {
+public class MenuCliente implements IMenu {
 
     private final Scanner sc;
     private Integer opcao;
 
-    public MenuAutor(Scanner sc, Integer opcao) {
-        this.sc = sc;
+    public MenuCliente(Scanner sc, Integer opcao) {
         this.opcao = opcao;
+        this.sc = sc;
     }
 
     @Override
     public void exibirMenu() {
         opcao = -1;
-        System.out.println("--------- Menu Autor ---------");
+        System.out.println("--------- Menu Cliente ---------");
         System.out.println("0 - Voltar");
         System.out.println("--------- -------------- ---------");
         System.out.println("1 - Criar ");
@@ -29,7 +31,9 @@ public class MenuAutor implements IMenu {
         System.out.println("4 - Listar Todos");
         System.out.println("5 - Listar Por Id");
         System.out.println("--------- -------------- ---------");
+
         while (opcao != 0) {
+
             System.out.print("Informe a opção desejada: ");
             opcao = sc.nextInt();
 
@@ -59,78 +63,72 @@ public class MenuAutor implements IMenu {
         }
     }
 
-    private void findById() {
-        sc.nextLine();
-        System.out.print("Informe o Id do Autor: ");
-        Long id = sc.nextLong();
-        Autor autor = AutorDao.getInstance().getById(id);
-        System.out.println(autor);
-        System.out.println("--------------------------------\n\n");
+    private void findAll() {
+        ClienteDao.getInstance().getAll().forEach(System.out::println);
+        System.out.println("-------------------------------\n\n");
         close();
     }
 
-    private void findAll() {
-        AutorDao.getInstance().getAll().forEach(System.out::println);
-        System.out.println("-------------------------------\n\n");
+    private void findById() {
+        sc.nextLine();
+        System.out.print("Informe o Id do Cliente: ");
+        Long id = sc.nextLong();
+        Cliente cliente = ClienteDao.getInstance().getById(id);
+        System.out.println(cliente);
+        System.out.println("--------------------------------\n\n");
         close();
     }
 
     private void create() {
         sc.nextLine();
-        System.out.print("Informe o nome do Autor: ");
+        System.out.print("Informe o nome do Cliente: ");
         String nome = sc.nextLine();
 
-        System.out.print("Informe a data de nascimento do Autor: ");
-        String dataNascimento = sc.nextLine();
+        System.out.print("Informe o e-mail do Cliente: ");
+        String email = sc.nextLine();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate lDataNascimento = LocalDate.parse(dataNascimento, formatter);
+        Cliente cliente = new Cliente(nome, email);
+        ClienteDao.getInstance().salvar(cliente);
 
-        Autor autor = new Autor();
-        autor.setNome(nome);
-        autor.setDataNascimento(lDataNascimento);
-
-        AutorDao.getInstance().salvar(autor);
         System.out.println("Autor criado com sucesso!\n");
         close();
     }
 
-    private void delete(){
+    private void edit() {
         sc.nextLine();
-        System.out.print("Informe o Id do Autor: ");
+        System.out.println("Informe o Id do Cliente: ");
         Long id = sc.nextLong();
-        AutorDao.getInstance().excluir(id);
+        sc.nextLine();
+
+        Cliente clienteEncontrado = ClienteDao.getInstance().getById(id);
+        System.out.println("Cliente encontrado: " + clienteEncontrado);
+        System.out.println("---------------------------");
+
+        System.out.println("Informe o nome do Cliente: ");
+        String nome = sc.nextLine();
+
+        System.out.println("Informe o e-mail do Cliente: ");
+        String email = sc.nextLine();
+        clienteEncontrado.setNome(nome);
+        clienteEncontrado.setEmail(email);
+
+        ClienteDao.getInstance().editar(clienteEncontrado);
+        System.out.println("Cliente atualizado com sucesso!\n");
+        close();
+    }
+
+    private void delete() {
+        sc.nextLine();
+        System.out.print("Informe o Id do Cliente: ");
+        Long id = sc.nextLong();
+        ClienteDao.getInstance().excluir(id);
         System.out.println("--------------------------------");
         findAll();
         close();
     }
 
-    private void edit(){
-        sc.nextLine();
-        System.out.println("Informe o Id do Autor: ");
-        Long id = sc.nextLong();
-        sc.nextLine();
-
-        Autor autorEncontrado = AutorDao.getInstance().getById(id);
-        System.out.println("Autor encontrado: " + autorEncontrado);
-        System.out.println("---------------------------");
-
-        System.out.println("Informe o nome do Autor: ");
-        String nome = sc.nextLine();
-
-        System.out.println("Informe a data de nascimento do Autor: (dd/MM/yyyy)");
-        String dataNascimento = sc.nextLine();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate lDataNascimento = LocalDate.parse(dataNascimento, formatter);
-
-        Autor autor = new Autor(id, nome, lDataNascimento);
-        AutorDao.getInstance().editar(autor);
-        System.out.println("Autor atualizado com sucesso!\n");
-        close();
-    }
-
-    private void close(){
+    public void close() {
         opcao = 0;
     }
+
 }

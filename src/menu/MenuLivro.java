@@ -5,11 +5,11 @@ import dao.LivroDao;
 import model.Autor;
 import model.Livro;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
-public class MenuLivro implements IMenu{
+public class MenuLivro implements IMenu {
 
     private final Scanner sc;
     private Integer opcao;
@@ -23,13 +23,15 @@ public class MenuLivro implements IMenu{
     public void exibirMenu() {
         opcao = -1;
         System.out.println("--------- Menu Livro ---------");
-        System.out.println("0 - Sair do Sistema");
+        System.out.println("0 - Voltar");
         System.out.println("--------- -------------- ---------");
         System.out.println("1 - Criar ");
         System.out.println("2 - Modificar");
         System.out.println("3 - Excluir");
-        System.out.println("4 - Listar Todos");
-        System.out.println("5 - Listar Por Id");
+        System.out.println("4 - Listar Livros - Todos");
+        System.out.println("5 - Listar Livros - Por Id");
+        System.out.println("6 - Listar Livros - Por Titulo");
+        System.out.println("7 - Listar Livros - Por Autor");
         System.out.println("--------- -------------- ---------");
 
         while (opcao != 0) {
@@ -55,11 +57,49 @@ public class MenuLivro implements IMenu{
                 case 5:
                     findById();
                     break;
+                case 6:
+                    findByTitle();
+                    break;
+                case 7:
+                    findByAutor();
+                    break;
                 default:
                     System.out.println("Opção selecionada é inválida.\n\n\n");
                     break;
             }
         }
+    }
+
+    private void findByAutor() {
+        sc.nextLine();
+        System.out.println("Informe o nome do Autor do Livro: ");
+        String nomeAutor = sc.nextLine();
+
+        List<Livro> livros = LivroDao.getInstance().getAll()
+                .stream().filter(x -> x.getAutor().getNome().toLowerCase().contains(nomeAutor))
+                .toList();
+        if (livros.isEmpty()){
+            System.err.println("Livro não encontrado!");
+        } else {
+            livros.forEach(System.out::println);
+        }
+        close();
+    }
+
+    private void findByTitle() {
+        sc.nextLine();
+        System.out.println("Informe o Titulo do Livro: ");
+        String titulo = sc.nextLine();
+
+        List<Livro> livros = LivroDao.getInstance().getAll()
+                .stream().filter(x -> x.getTitulo().toLowerCase().contains(titulo))
+                .toList();
+        if (livros.isEmpty()){
+            System.err.println("Livro não encontrado!");
+        } else {
+            livros.forEach(System.out::println);
+        }
+        close();
     }
 
     private void create() {
@@ -85,7 +125,7 @@ public class MenuLivro implements IMenu{
         close();
     }
 
-    private void edit(){
+    private void edit() {
         sc.nextLine();
         System.out.print("Informe o Id do Livro: ");
         Long id = sc.nextLong();
@@ -101,15 +141,13 @@ public class MenuLivro implements IMenu{
 
         livroEncontrado.setTitulo(nome);
         livroEncontrado.setAutor(autor);
-
-
         LivroDao.getInstance().editar(livroEncontrado);
         System.out.println("Livro criado com sucesso!");
 
         close();
     }
 
-    private void delete(){
+    private void delete() {
         sc.nextLine();
         System.out.print("Informe o Id do Livro: ");
         Long id = sc.nextLong();

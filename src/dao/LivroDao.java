@@ -4,6 +4,8 @@ import model.Livro;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class LivroDao implements Dao<Livro>{
 
     private static BancoDados db = null;
@@ -50,4 +52,11 @@ public class LivroDao implements Dao<Livro>{
                 .filter(x -> x.getId().equals(id))
                 .findFirst().orElseThrow(() -> new RuntimeException("Livro não encontrado."));
     }
+
+    public List<Livro> getAllByStatus(Boolean status) {
+        return db.getLivros().stream()
+                .filter(x -> x.getDisponivel().equals(status)).toList();
+    }
+
+
 }

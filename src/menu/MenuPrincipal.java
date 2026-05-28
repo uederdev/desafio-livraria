@@ -9,9 +9,8 @@ public class MenuPrincipal implements IMenu {
         System.out.println("--------- -------------- ---------");
         System.out.println("1 - Autor");
         System.out.println("2 - Livro");
-        System.out.println("3 - Emprestar Livros");
+        System.out.println("3 - Cliente");
+        System.out.println("4 - Emprestar Livros");
         System.out.println("--------- -------------- ---------");
-        System.out.println("4 - Livros da Biblioteca");
-        System.out.println("--------- -------------- ---------\n");
     }
 }

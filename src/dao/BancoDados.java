@@ -2,6 +2,7 @@ package dao;
 
 import model.Autor;
 import model.Cliente;
+import model.Emprestimo;
 import model.Livro;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class BancoDados {
     private static List<Autor> autores = new ArrayList<>();
     private static List<Livro> livros = new ArrayList<>();
     private static List<Cliente> clientes = new ArrayList<>();
+    private static List<Emprestimo> emprestimos = new ArrayList<>();
     private static Long id;
 
     private BancoDados(){
@@ -39,6 +41,11 @@ public class BancoDados {
         var livro3 = new Livro(getId(), "Batman vs Superman", autor3);
 
         livros.addAll(List.of(livro1, livro2, livro3));
+
+        var e1 = new Emprestimo(livro1, cliente3);
+        var e2 = new Emprestimo(livro2, cliente2);
+        var e3 = new Emprestimo(livro3, cliente1);
+        emprestimos.addAll(List.of(e1, e2, e3));
     }
 
     public static BancoDados getInstance(){
@@ -56,10 +63,13 @@ public class BancoDados {
         return livros;
     }
 
-    public static List<Cliente> getClientes() {
+    public List<Cliente> getClientes() {
         return clientes;
     }
 
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
     public Long getId() {
         return Math.round(Math.random() * 1000);
     }
